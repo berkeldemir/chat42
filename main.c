@@ -130,8 +130,8 @@ void *receive_messages(void *arg) {
 
                 // Kullanıcı adını karşılaştır
                 if (strcmp(msg_username, my_username) == 0) {
-                    printf("\r\033[KYou: %s\n", message);
-                } else {
+                    ;
+		} else {
                     printf("\r\033[K" COLOR_USER "%s" COLOR_RESET ": %s\n", 
                           msg_username, message);
                 }
