@@ -16,9 +16,18 @@
 
 int main() {
     // Video4Linux2 ayarları
-    int fd = open("/dev/video0", O_RDWR);
-    if(fd < 0) { perror("Video açılamadı"); exit(1); }
-
+	int fd = -1;
+	for(int i=0; i<4; i++){
+    	char dev[20];
+    	sprintf(dev, "/dev/video%d", i);
+    	fd = open(dev, O_RDWR);
+    	if(fd >= 0) break;
+	}
+	if(fd < 0) {
+    	perror("Hiçbir video cihazı bulunamadı");
+    	printf("Mevcut cihazları kontrol edin: ls /dev/video*\n");
+    	exit(1);
+	}
     struct v4l2_format fmt = {0};
     fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     fmt.fmt.pix.width = WIDTH;

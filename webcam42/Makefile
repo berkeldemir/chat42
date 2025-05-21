@@ -1,14 +1,14 @@
 CC = g++
-CFLAGS = -std=c++11 $(shell pkg-config --cflags sdl2)
+CFLAGS = -std=c++11 -Wall -Wextra $(shell pkg-config --cflags sdl2)
 LDFLAGS = $(shell pkg-config --libs sdl2)
 
-all: server client
+all: webcam_p2p
 
-server: server.cpp
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-client: client.cpp
+webcam_p2p: webcam_p2p.cpp
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 clean:
-	rm -f server client
+	rm -f webcam_p2p
+
+run:
+	./webcam_p2p
